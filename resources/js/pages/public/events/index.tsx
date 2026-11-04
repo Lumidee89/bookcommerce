@@ -14,7 +14,7 @@ export default function EventsIndex({ upcoming, past }: { upcoming: Event[]; pas
             >
                 <Link
                     href={route('speaking')}
-                    className="bg-primary text-primary-foreground mt-8 inline-flex rounded-md px-5 py-2.5 text-sm font-medium"
+                    className="bg-primary text-primary-foreground mt-8 inline-flex rounded-full px-5 py-2.5 text-sm font-medium"
                 >
                     Invite to your event
                 </Link>

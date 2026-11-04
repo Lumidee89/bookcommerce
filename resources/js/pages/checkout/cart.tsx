@@ -22,7 +22,7 @@ export default function Cart({ summary }: { summary: CartSummary }) {
                 </div>
 
                 {summary.issues.length > 0 && (
-                    <div role="alert" className="mt-6 space-y-1 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+                    <div role="alert" className="mt-6 space-y-1 rounded-3xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
                         {summary.issues.map((issue) => (
                             <p key={issue} className="flex items-start gap-2">
                                 <AlertTriangle className="mt-0.5 size-4 shrink-0" /> {issue}
@@ -36,7 +36,7 @@ export default function Cart({ summary }: { summary: CartSummary }) {
                         <EmptyState title="Your cart is empty" description="Browse the bookstore to find your next read.">
                             <Link
                                 href={route('books.index')}
-                                className="bg-primary text-primary-foreground rounded-md px-5 py-2.5 text-sm font-medium"
+                                className="bg-primary text-primary-foreground rounded-full px-5 py-2.5 text-sm font-medium"
                             >
                                 Visit the bookstore
                             </Link>
@@ -99,7 +99,7 @@ export default function Cart({ summary }: { summary: CartSummary }) {
                                 </li>
                             ))}
                         </ul>
-                        <aside className="border-border bg-card h-fit rounded-xl border p-6">
+                        <aside className="border-border bg-card h-fit rounded-3xl border p-6">
                             <h2 className="text-2xl font-semibold">Summary</h2>
                             <dl className="mt-4 space-y-2 text-sm">
                                 <div className="flex justify-between">

@@ -9,7 +9,7 @@ export default function Sandbox({ transaction }: { transaction: { reference: str
     return (
         <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-6">
             <Head title="Sandbox payment" />
-            <div className="w-full max-w-md rounded-2xl border-2 border-dashed border-amber-400 bg-white p-8 text-center shadow">
+            <div className="w-full max-w-md rounded-[2rem] border-2 border-dashed border-amber-400 bg-white p-8 text-center shadow">
                 <FlaskConical className="mx-auto size-10 text-amber-500" />
                 <h1 className="mt-3 font-sans text-xl font-bold">Payment sandbox</h1>
                 <p className="mt-1 text-sm text-neutral-600">Development only — no real payment provider, no money taken.</p>

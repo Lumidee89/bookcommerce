@@ -28,7 +28,7 @@ export default function ConsultationsIndex({ services }: { services: ServiceCard
                             text: 'A confirmation, calendar invite and meeting details are emailed to you.',
                         },
                     ].map((step, i) => (
-                        <li key={step.title} className="border-border bg-card flex gap-4 rounded-xl border p-5">
+                        <li key={step.title} className="border-border bg-card flex gap-4 rounded-3xl border p-5">
                             <span className="bg-gold-100 text-gold-800 flex size-9 shrink-0 items-center justify-center rounded-full font-serif text-lg font-semibold">
                                 {i + 1}
                             </span>
@@ -46,7 +46,7 @@ export default function ConsultationsIndex({ services }: { services: ServiceCard
                             <Link
                                 key={s.id}
                                 href={route('consultations.show', s.slug)}
-                                className="group border-border bg-card hover:border-gold-500 flex flex-col rounded-xl border p-7 transition-colors"
+                                className="group border-border bg-card hover:border-gold-500 flex flex-col rounded-3xl border p-7 transition-colors"
                             >
                                 <h2 className="group-hover:text-gold-700 text-3xl leading-tight font-semibold">{s.name}</h2>
                                 {s.summary && <p className="text-muted-foreground mt-3 flex-1">{s.summary}</p>}
@@ -77,7 +77,7 @@ export default function ConsultationsIndex({ services }: { services: ServiceCard
                         title="Consultation booking opens soon"
                         description="Services are being finalised. In the meantime, please get in touch."
                     >
-                        <Link href={route('contact')} className="bg-primary text-primary-foreground rounded-md px-5 py-2.5 text-sm font-medium">
+                        <Link href={route('contact')} className="bg-primary text-primary-foreground rounded-full px-5 py-2.5 text-sm font-medium">
                             Contact us
                         </Link>
                     </EmptyState>

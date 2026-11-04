@@ -26,7 +26,7 @@ export function FlashMessages({ className }: { className?: string }) {
                         key={kind}
                         role={kind === 'error' ? 'alert' : 'status'}
                         className={cn(
-                            'pointer-events-auto flex w-full max-w-xl items-start gap-3 rounded-lg border p-4 text-sm shadow-lg',
+                            'pointer-events-auto flex w-full max-w-xl items-start gap-3 rounded-2xl border p-4 text-sm shadow-lg',
                             kind === 'success' ? 'border-brand-200 bg-brand-50 text-brand-900' : 'border-red-200 bg-red-50 text-red-900',
                         )}
                     >

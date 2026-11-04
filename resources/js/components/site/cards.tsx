@@ -47,7 +47,7 @@ export function BookCover({ book, className }: { book: Pick<Book, 'title' | 'sub
 export function BookCard({ book }: { book: Book }) {
     return (
         <Link href={route('books.show', book.slug)} className="group flex flex-col">
-            <div className="bg-muted/60 group-hover:bg-accent rounded-lg px-8 pt-8 pb-6 transition-colors">
+            <div className="bg-muted/60 group-hover:bg-accent rounded-2xl px-8 pt-8 pb-6 transition-colors">
                 <BookCover book={book} className="transition-transform duration-300 group-hover:-translate-y-1" />
             </div>
             <div className="mt-4 flex flex-1 flex-col">
@@ -71,7 +71,7 @@ export function BookCard({ book }: { book: Book }) {
 export function ArticleCard({ article, featured = false }: { article: Article; featured?: boolean }) {
     return (
         <article className="group relative flex flex-col">
-            <div className={cn('bg-muted overflow-hidden rounded-lg', featured ? 'aspect-[16/10]' : 'aspect-[16/10]')}>
+            <div className={cn('bg-muted overflow-hidden rounded-2xl', featured ? 'aspect-[16/10]' : 'aspect-[16/10]')}>
                 {article.image_url ? (
                     <img
                         src={article.image_url}
@@ -108,7 +108,7 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
 export function VideoCard({ video }: { video: Video }) {
     return (
         <Link href={route('videos.show', video.slug)} className="group flex flex-col">
-            <div className="bg-brand-900 relative aspect-video overflow-hidden rounded-lg">
+            <div className="bg-brand-900 relative aspect-video overflow-hidden rounded-2xl">
                 {video.thumbnail_url ? (
                     <img
                         src={video.thumbnail_url}
@@ -141,9 +141,9 @@ export function EventCard({ event }: { event: Event }) {
     return (
         <Link
             href={route('events.show', event.slug)}
-            className="group border-border bg-card hover:border-gold-400 flex gap-5 rounded-xl border p-5 transition-colors"
+            className="group border-border bg-card hover:border-gold-400 flex gap-5 rounded-3xl border p-5 transition-colors"
         >
-            <div className="bg-brand-900 flex w-16 shrink-0 flex-col items-center justify-center rounded-lg py-3 text-[#f7f3ea]">
+            <div className="bg-brand-900 flex w-16 shrink-0 flex-col items-center justify-center rounded-2xl py-3 text-[#f7f3ea]">
                 <span className="text-gold-300 text-[0.65rem] font-semibold tracking-widest uppercase">
                     {new Intl.DateTimeFormat('en-GB', { month: 'short', timeZone: event.timezone }).format(date)}
                 </span>
@@ -182,7 +182,7 @@ export function EventCard({ event }: { event: Event }) {
 export function AlbumCard({ album }: { album: Album }) {
     return (
         <Link href={route('gallery.show', album.slug)} className="group block">
-            <div className="bg-muted relative aspect-[4/3] overflow-hidden rounded-lg">
+            <div className="bg-muted relative aspect-[4/3] overflow-hidden rounded-2xl">
                 {album.cover_url ? (
                     <img
                         src={album.cover_url}

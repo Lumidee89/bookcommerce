@@ -55,14 +55,14 @@ export default function Contact({ categories }: { categories: { value: string; l
                         </p>
                     )}
                     <div className="border-border space-y-3 border-t pt-6">
-                        <Link href={route('consultations.index')} className="hover:bg-accent flex items-start gap-3 rounded-lg p-3">
+                        <Link href={route('consultations.index')} className="hover:bg-accent flex items-start gap-3 rounded-2xl p-3">
                             <CalendarCheck className="text-gold-600 mt-0.5 size-5 shrink-0" />
                             <span>
                                 <span className="font-semibold">Booking a consultation?</span>
                                 <span className="text-muted-foreground block text-sm">Use the booking page to choose a time directly.</span>
                             </span>
                         </Link>
-                        <Link href={route('speaking')} className="hover:bg-accent flex items-start gap-3 rounded-lg p-3">
+                        <Link href={route('speaking')} className="hover:bg-accent flex items-start gap-3 rounded-2xl p-3">
                             <Mic2 className="text-gold-600 mt-0.5 size-5 shrink-0" />
                             <span>
                                 <span className="font-semibold">Inviting Yemi to speak?</span>
@@ -74,7 +74,7 @@ export default function Contact({ categories }: { categories: { value: string; l
                     </div>
                 </aside>
 
-                <form onSubmit={submit} className="border-border bg-card relative space-y-5 rounded-2xl border p-6 sm:p-8" noValidate>
+                <form onSubmit={submit} className="border-border bg-card relative space-y-5 rounded-[2rem] border p-6 sm:p-8" noValidate>
                     <Honeypot value={data.website} onChange={(v) => setData('website', v)} />
                     {wasSuccessful && (
                         <p role="status" className="bg-brand-50 text-brand-900 rounded-md p-4 text-sm">
@@ -125,7 +125,7 @@ export default function Contact({ categories }: { categories: { value: string; l
                     <button
                         type="submit"
                         disabled={processing}
-                        className="bg-primary text-primary-foreground rounded-md px-6 py-3 font-medium disabled:opacity-60"
+                        className="bg-primary text-primary-foreground rounded-full px-6 py-3 font-medium disabled:opacity-60"
                     >
                         {processing ? 'Sending…' : 'Send message'}
                     </button>

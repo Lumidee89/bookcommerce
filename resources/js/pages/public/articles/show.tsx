@@ -46,7 +46,7 @@ export default function ArticleShow({ article, related, isPreview }: { article: 
                 </header>
                 {article.image_url && (
                     <Container className="max-w-5xl pt-10">
-                        <img src={article.image_url} alt="" className="aspect-[16/8] w-full rounded-xl object-cover" />
+                        <img src={article.image_url} alt="" className="aspect-[16/8] w-full rounded-3xl object-cover" />
                     </Container>
                 )}
                 <Container className="max-w-3xl py-12">

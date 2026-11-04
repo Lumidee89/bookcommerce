@@ -29,7 +29,7 @@ export function CurrencySwitcher({ className }: { className?: string }) {
             <select
                 value={cart.currency}
                 onChange={(e) => router.post(route('currency.update'), { currency: e.target.value }, { preserveScroll: true })}
-                className="border-border bg-background text-foreground focus-visible:ring-ring rounded-md border px-2 py-1 text-xs font-medium focus-visible:ring-2 focus-visible:outline-none"
+                className="border-border bg-background text-foreground focus-visible:ring-ring rounded-full border px-2.5 py-1 text-xs font-medium focus-visible:ring-2 focus-visible:outline-none"
             >
                 {currencies.map((c) => (
                     <option key={c} value={c}>
@@ -47,8 +47,8 @@ export function SiteHeader() {
     const path = page.url;
 
     return (
-        <header className="border-border/70 bg-background/90 supports-[backdrop-filter]:bg-background/75 sticky top-0 z-40 border-b backdrop-blur">
-            <div className="mx-auto flex h-18 max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
+        <header className="bg-background/90 supports-[backdrop-filter]:bg-background/70 sticky top-0 z-40 backdrop-blur">
+            <div className="mx-auto flex h-20 max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
                 <Link href="/" className="shrink-0" aria-label="Yemi Adebanjo — home">
                     <Wordmark compact />
                 </Link>
@@ -59,13 +59,14 @@ export function SiteHeader() {
                             key={item.href}
                             href={item.href}
                             className={cn(
-                                'rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                                isActive(path, item.href) ? 'text-brand-900 dark:text-gold-200' : 'text-muted-foreground hover:text-foreground',
+                                'rounded-full px-3 py-2 text-sm transition-colors',
+                                isActive(path, item.href)
+                                    ? 'text-brand-900 dark:text-gold-200 font-semibold'
+                                    : 'text-muted-foreground hover:text-foreground font-medium',
                             )}
                             aria-current={isActive(path, item.href) ? 'page' : undefined}
                         >
                             {item.title}
-                            {isActive(path, item.href) && <span className="bg-gold-600 mx-auto mt-0.5 block h-px w-4" />}
                         </Link>
                     ))}
                 </nav>
@@ -74,7 +75,7 @@ export function SiteHeader() {
                     <CurrencySwitcher className="hidden sm:flex" />
                     <Link
                         href={route('cart.show')}
-                        className="hover:bg-accent relative rounded-md p-2"
+                        className="hover:bg-accent relative rounded-full p-2.5"
                         aria-label={`Cart, ${cart.count} item${cart.count === 1 ? '' : 's'}`}
                     >
                         <ShoppingBag className="size-5" />
@@ -85,19 +86,19 @@ export function SiteHeader() {
                         )}
                     </Link>
                     {auth.user && (
-                        <Link href={route('admin.dashboard')} className="hover:bg-accent hidden rounded-md p-2 sm:block" aria-label="Dashboard">
+                        <Link href={route('admin.dashboard')} className="hover:bg-accent hidden rounded-full p-2.5 sm:block" aria-label="Dashboard">
                             <LayoutDashboard className="size-5" />
                         </Link>
                     )}
                     <Link
                         href={route('consultations.index')}
-                        className="bg-primary text-primary-foreground hover:bg-primary/90 hidden rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap md:inline-flex"
+                        className="border-brand-900 text-brand-900 hover:bg-brand-900 dark:border-gold-300 dark:text-gold-200 dark:hover:bg-gold-300 dark:hover:text-brand-900 hidden rounded-full border px-5 py-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:text-white md:inline-flex"
                     >
                         Book a consultation
                     </Link>
 
                     <Sheet>
-                        <SheetTrigger className="hover:bg-accent rounded-md p-2 xl:hidden" aria-label="Open menu">
+                        <SheetTrigger className="hover:bg-accent rounded-full p-2 xl:hidden" aria-label="Open menu">
                             <Menu className="size-6" />
                         </SheetTrigger>
                         <SheetContent side="right" className="bg-background flex w-80 flex-col">
@@ -106,7 +107,7 @@ export function SiteHeader() {
                                 <Wordmark compact />
                             </SheetHeader>
                             <nav aria-label="Mobile" className="flex flex-col gap-1 px-4">
-                                <Link href="/" className="hover:bg-accent rounded-md px-3 py-3 text-base font-medium">
+                                <Link href="/" className="hover:bg-accent rounded-full px-4 py-3 text-base font-medium">
                                     Home
                                 </Link>
                                 {primaryNav.map((item) => (
@@ -114,14 +115,14 @@ export function SiteHeader() {
                                         key={item.href}
                                         href={item.href}
                                         className={cn(
-                                            'hover:bg-accent rounded-md px-3 py-3 text-base font-medium',
+                                            'hover:bg-accent rounded-full px-4 py-3 text-base font-medium',
                                             isActive(path, item.href) && 'bg-accent',
                                         )}
                                     >
                                         {item.title}
                                     </Link>
                                 ))}
-                                <Link href="/gallery" className="hover:bg-accent rounded-md px-3 py-3 text-base font-medium">
+                                <Link href="/gallery" className="hover:bg-accent rounded-full px-4 py-3 text-base font-medium">
                                     Gallery
                                 </Link>
                             </nav>
@@ -129,7 +130,7 @@ export function SiteHeader() {
                                 <CurrencySwitcher />
                                 <Link
                                     href={route('consultations.index')}
-                                    className="bg-primary text-primary-foreground rounded-md px-4 py-3 text-center font-medium"
+                                    className="bg-primary text-primary-foreground rounded-full px-4 py-3 text-center font-medium"
                                 >
                                     Book a consultation
                                 </Link>

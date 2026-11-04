@@ -61,7 +61,7 @@ export default function BookShow({ book, related }: { book: BookDetail; related:
 
             <Container className="grid gap-12 pb-20 lg:grid-cols-[minmax(0,420px)_1fr] lg:gap-16">
                 <div className="lg:sticky lg:top-28 lg:self-start">
-                    <div className="bg-muted/60 rounded-2xl p-10 sm:p-14">
+                    <div className="bg-muted/60 rounded-[2rem] p-10 sm:p-14">
                         <BookCover book={book} />
                     </div>
                     {book.sample_url && (
@@ -69,7 +69,7 @@ export default function BookShow({ book, related }: { book: BookDetail; related:
                             href={book.sample_url}
                             target="_blank"
                             rel="noopener"
-                            className="border-border hover:border-gold-500 mt-4 flex items-center justify-center gap-2 rounded-md border px-4 py-3 text-sm font-medium"
+                            className="border-border hover:border-gold-500 mt-4 flex items-center justify-center gap-2 rounded-full border px-4 py-3 text-sm font-medium"
                         >
                             <BookOpen className="size-4" /> Read a sample
                         </a>
@@ -88,7 +88,7 @@ export default function BookShow({ book, related }: { book: BookDetail; related:
                         by <span className="font-semibold">{book.author}</span>
                     </p>
 
-                    <form onSubmit={addToCart} className="border-border bg-card mt-8 rounded-xl border p-6">
+                    <form onSubmit={addToCart} className="border-border bg-card mt-8 rounded-3xl border p-6">
                         {book.format_options.length > 0 ? (
                             <fieldset>
                                 <legend className="text-sm font-semibold">Choose a format</legend>
@@ -99,7 +99,7 @@ export default function BookShow({ book, related }: { book: BookDetail; related:
                                             <label
                                                 key={f.id}
                                                 className={cn(
-                                                    'flex cursor-pointer items-start gap-3 rounded-lg border p-4 transition-colors',
+                                                    'flex cursor-pointer items-start gap-3 rounded-2xl border p-4 transition-colors',
                                                     formatId === f.id
                                                         ? 'border-gold-600 bg-gold-50 dark:bg-white/5'
                                                         : 'border-border hover:border-gold-300',
@@ -158,7 +158,7 @@ export default function BookShow({ book, related }: { book: BookDetail; related:
                                 <button
                                     type="submit"
                                     disabled={!canBuy || processing}
-                                    className="bg-primary text-primary-foreground hover:bg-primary/90 h-11 flex-1 rounded-md px-6 font-medium disabled:opacity-50 sm:flex-none"
+                                    className="bg-primary text-primary-foreground hover:bg-primary/90 h-11 flex-1 rounded-full px-6 font-medium disabled:opacity-50 sm:flex-none"
                                 >
                                     {processing ? 'Adding…' : 'Add to cart'}
                                 </button>
@@ -193,7 +193,7 @@ export default function BookShow({ book, related }: { book: BookDetail; related:
                     </div>
 
                     {book.table_of_contents_html && (
-                        <details className="border-border mt-10 rounded-xl border p-6">
+                        <details className="border-border mt-10 rounded-3xl border p-6">
                             <summary className="cursor-pointer text-xl font-semibold">Table of contents</summary>
                             <Prose html={book.table_of_contents_html} className="mt-4" />
                         </details>

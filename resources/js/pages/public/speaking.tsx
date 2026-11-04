@@ -75,14 +75,14 @@ export default function Speaking() {
                 description="Conferences, leadership trainings, church services, retreats and institutional events — in person or online."
             />
             <Container className="py-14">
-                <div className="bg-gold-50 border-gold-200 text-gold-900 dark:text-gold-100 mb-8 flex items-start gap-3 rounded-xl border p-5 text-sm dark:border-white/10 dark:bg-white/5">
+                <div className="bg-gold-50 border-gold-200 text-gold-900 dark:text-gold-100 mb-8 flex items-start gap-3 rounded-3xl border p-5 text-sm dark:border-white/10 dark:bg-white/5">
                     <Info className="mt-0.5 size-5 shrink-0" />
                     <p>
                         Submitting an invitation does not confirm availability or acceptance. Every invitation is reviewed, and you will receive a
                         response by email.
                     </p>
                 </div>
-                <form onSubmit={submit} className="border-border bg-card relative space-y-10 rounded-2xl border p-6 sm:p-8" noValidate>
+                <form onSubmit={submit} className="border-border bg-card relative space-y-10 rounded-[2rem] border p-6 sm:p-8" noValidate>
                     <Honeypot value={data.website} onChange={(v) => setData('website', v)} />
                     {wasSuccessful && (
                         <p role="status" className="bg-brand-50 text-brand-900 rounded-md p-4 text-sm">
@@ -128,7 +128,7 @@ export default function Speaking() {
                     <button
                         type="submit"
                         disabled={processing}
-                        className="bg-primary text-primary-foreground rounded-md px-6 py-3 font-medium disabled:opacity-60"
+                        className="bg-primary text-primary-foreground rounded-full px-6 py-3 font-medium disabled:opacity-60"
                     >
                         {processing ? 'Sending…' : 'Submit invitation'}
                     </button>

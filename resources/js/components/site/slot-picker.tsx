@@ -151,7 +151,7 @@ export function SlotPicker({
                                 onClick={() => onChange(slot)}
                                 aria-pressed={value === slot}
                                 className={cn(
-                                    'rounded-md border px-3 py-2.5 text-sm font-medium transition-colors',
+                                    'rounded-full border px-3 py-2.5 text-sm font-medium transition-colors',
                                     value === slot ? 'bg-primary text-primary-foreground border-primary' : 'border-border hover:border-gold-500',
                                 )}
                             >

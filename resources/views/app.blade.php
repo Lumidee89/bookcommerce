@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#0b2c1d">
+        <meta name="theme-color" content="#3f1f56">
 
         <title inertia>{{ $title }}</title>
         <meta name="description" content="{{ $description }}">
@@ -34,7 +34,7 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600|cormorant-garamond:500,600,700,500i&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600|poppins:500,600,700|cormorant-garamond:500,600,700,500i&display=swap" rel="stylesheet" />
 
         @routes
         @viteReactRefresh

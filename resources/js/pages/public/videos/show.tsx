@@ -13,7 +13,7 @@ export default function VideoShow({ video, related }: { video: VideoDetail; rela
                 <Link href={route('videos.index')} className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-sm">
                     <ArrowLeft className="size-4" /> Video library
                 </Link>
-                <div className="bg-brand-900 mt-6 aspect-video overflow-hidden rounded-xl shadow-xl">
+                <div className="bg-brand-900 mt-6 aspect-video overflow-hidden rounded-3xl shadow-xl">
                     {video.embed_url ? (
                         <iframe
                             src={video.embed_url}
@@ -41,7 +41,7 @@ export default function VideoShow({ video, related }: { video: VideoDetail; rela
                 </p>
                 {video.description && <p className="mt-6 max-w-3xl text-lg whitespace-pre-line">{video.description}</p>}
                 {video.transcript && (
-                    <details className="border-border mt-8 rounded-xl border p-6">
+                    <details className="border-border mt-8 rounded-3xl border p-6">
                         <summary className="cursor-pointer font-semibold">Transcript</summary>
                         <p className="text-muted-foreground mt-4 whitespace-pre-line">{video.transcript}</p>
                     </details>

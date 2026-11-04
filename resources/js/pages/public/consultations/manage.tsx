@@ -55,7 +55,7 @@ export default function ManageBooking({ booking, token, canCancel, canReschedule
                 <p className="text-muted-foreground text-sm">Booking {booking.reference}</p>
                 <h1 className="text-brand-900 dark:text-foreground mt-1 text-4xl font-semibold sm:text-5xl">{booking.service_name}</h1>
 
-                <div className={cn('mt-6 flex items-start gap-3 rounded-xl border p-5', tone)}>
+                <div className={cn('mt-6 flex items-start gap-3 rounded-3xl border p-5', tone)}>
                     {booking.status === 'confirmed' ? (
                         <CheckCircle2 className="size-6 shrink-0" />
                     ) : booking.status === 'pending_payment' ? (
@@ -80,7 +80,7 @@ export default function ManageBooking({ booking, token, canCancel, canReschedule
                     </div>
                 </div>
 
-                <dl className="border-border bg-card mt-6 grid gap-5 rounded-xl border p-6 sm:grid-cols-2">
+                <dl className="border-border bg-card mt-6 grid gap-5 rounded-3xl border p-6 sm:grid-cols-2">
                     <div className="flex gap-3">
                         <CalendarClock className="text-gold-600 size-5 shrink-0" />
                         <div>
@@ -117,7 +117,7 @@ export default function ManageBooking({ booking, token, canCancel, canReschedule
                 {canPay && (
                     <button
                         onClick={() => router.post(route('bookings.pay', booking.reference), { token })}
-                        className="bg-primary text-primary-foreground mt-6 w-full rounded-md px-6 py-3 font-medium"
+                        className="bg-primary text-primary-foreground mt-6 w-full rounded-full px-6 py-3 font-medium"
                     >
                         Pay {formatMoney(booking.fee, booking.currency)} to confirm
                     </button>
@@ -128,7 +128,7 @@ export default function ManageBooking({ booking, token, canCancel, canReschedule
                         {canReschedule && (
                             <button
                                 onClick={() => setMode('reschedule')}
-                                className="border-border hover:border-gold-500 rounded-md border px-5 py-2.5 text-sm font-medium"
+                                className="border-border hover:border-gold-500 rounded-full border px-5 py-2.5 text-sm font-medium"
                             >
                                 Reschedule
                             </button>
@@ -150,7 +150,7 @@ export default function ManageBooking({ booking, token, canCancel, canReschedule
                             e.preventDefault();
                             rescheduleForm.post(route('bookings.reschedule', booking.reference), { onSuccess: () => setMode('view') });
                         }}
-                        className="border-border mt-8 space-y-5 rounded-xl border p-6"
+                        className="border-border mt-8 space-y-5 rounded-3xl border p-6"
                     >
                         <h2 className="text-2xl font-semibold">Choose a new time</h2>
                         {policy.rescheduling && <p className="text-muted-foreground text-sm">{policy.rescheduling}</p>}
@@ -165,7 +165,7 @@ export default function ManageBooking({ booking, token, canCancel, canReschedule
                             <button
                                 type="submit"
                                 disabled={!rescheduleForm.data.starts_at || rescheduleForm.processing}
-                                className="bg-primary text-primary-foreground rounded-md px-5 py-2.5 text-sm font-medium disabled:opacity-50"
+                                className="bg-primary text-primary-foreground rounded-full px-5 py-2.5 text-sm font-medium disabled:opacity-50"
                             >
                                 Confirm new time
                             </button>
@@ -182,7 +182,7 @@ export default function ManageBooking({ booking, token, canCancel, canReschedule
                             e.preventDefault();
                             cancelForm.post(route('bookings.cancel', booking.reference), { onSuccess: () => setMode('view') });
                         }}
-                        className="mt-8 space-y-4 rounded-xl border border-red-200 p-6"
+                        className="mt-8 space-y-4 rounded-3xl border border-red-200 p-6"
                     >
                         <h2 className="text-2xl font-semibold">Cancel this booking?</h2>
                         {policy.cancellation && <p className="text-muted-foreground text-sm">{policy.cancellation}</p>}

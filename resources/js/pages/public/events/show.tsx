@@ -32,10 +32,10 @@ export default function EventShow({
                         )}
                         <h1 className="text-brand-900 dark:text-foreground mt-3 text-5xl font-semibold">{event.title}</h1>
                         {event.summary && <p className="text-muted-foreground mt-4 text-xl">{event.summary}</p>}
-                        {event.image_url && <img src={event.image_url} alt="" className="mt-8 w-full rounded-xl" />}
+                        {event.image_url && <img src={event.image_url} alt="" className="mt-8 w-full rounded-3xl" />}
                         <Prose html={event.description_html} className="mt-8" />
                     </div>
-                    <aside className="border-border bg-card h-fit rounded-xl border p-6 lg:sticky lg:top-28">
+                    <aside className="border-border bg-card h-fit rounded-3xl border p-6 lg:sticky lg:top-28">
                         <dl className="space-y-4 text-sm">
                             <div className="flex gap-3">
                                 <Calendar className="text-gold-600 size-5 shrink-0" />
@@ -76,7 +76,7 @@ export default function EventShow({
                                 href={event.registration_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-primary text-primary-foreground mt-6 block rounded-md px-4 py-3 text-center font-medium"
+                                className="bg-primary text-primary-foreground mt-6 block rounded-full px-4 py-3 text-center font-medium"
                             >
                                 Register or enquire
                             </a>

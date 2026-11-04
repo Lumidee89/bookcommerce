@@ -67,13 +67,13 @@ export default function ConsultationShow({
                             </p>
                         )}
                         {service.preparation_instructions && (
-                            <div className="bg-muted/60 mt-8 rounded-xl p-5">
+                            <div className="bg-muted/60 mt-8 rounded-3xl p-5">
                                 <h2 className="font-sans text-sm font-semibold">How to prepare</h2>
                                 <p className="text-muted-foreground mt-1 text-sm whitespace-pre-line">{service.preparation_instructions}</p>
                             </div>
                         )}
                         {(service.cancellation_policy || service.rescheduling_policy) && (
-                            <div className="border-border mt-6 space-y-3 rounded-xl border p-5 text-sm">
+                            <div className="border-border mt-6 space-y-3 rounded-3xl border p-5 text-sm">
                                 {service.cancellation_policy && (
                                     <p>
                                         <span className="font-semibold">Cancellation: </span>
@@ -95,7 +95,7 @@ export default function ConsultationShow({
                         )}
                     </div>
 
-                    <div className="border-border bg-card rounded-2xl border p-6 shadow-sm sm:p-8">
+                    <div className="border-border bg-card rounded-[2rem] border p-6 shadow-sm sm:p-8">
                         {bookable ? (
                             <form onSubmit={submit} className="space-y-8" noValidate>
                                 <Honeypot value={data.website} onChange={(v) => setData('website', v)} />
@@ -193,7 +193,7 @@ export default function ConsultationShow({
                                     </FormField>
                                 </section>
 
-                                <section aria-labelledby="step-review" className="bg-muted/50 space-y-4 rounded-xl p-5">
+                                <section aria-labelledby="step-review" className="bg-muted/50 space-y-4 rounded-3xl p-5">
                                     <h2 id="step-review" className="text-2xl font-semibold">
                                         3. Review
                                     </h2>
@@ -228,7 +228,7 @@ export default function ConsultationShow({
                                     <button
                                         type="submit"
                                         disabled={processing || !data.starts_at}
-                                        className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md px-6 py-3 font-medium disabled:opacity-50"
+                                        className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-full px-6 py-3 font-medium disabled:opacity-50"
                                     >
                                         {processing
                                             ? 'Reserving…'
@@ -252,7 +252,7 @@ export default function ConsultationShow({
                                 </p>
                                 <Link
                                     href={route('contact')}
-                                    className="bg-primary text-primary-foreground mt-6 inline-flex rounded-md px-5 py-2.5 text-sm font-medium"
+                                    className="bg-primary text-primary-foreground mt-6 inline-flex rounded-full px-5 py-2.5 text-sm font-medium"
                                 >
                                     Send an enquiry
                                 </Link>

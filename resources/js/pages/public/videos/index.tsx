@@ -27,7 +27,7 @@ export default function VideosIndex({
             <Container className="py-12">
                 {featured?.embed_url && (
                     <div className="mb-14 grid items-center gap-8 lg:grid-cols-[1.5fr_1fr]">
-                        <div className="bg-brand-900 aspect-video overflow-hidden rounded-xl">
+                        <div className="bg-brand-900 aspect-video overflow-hidden rounded-3xl">
                             <iframe
                                 src={featured.embed_url}
                                 title={featured.title}

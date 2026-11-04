@@ -101,7 +101,7 @@ export default function Checkout({
                                                 <label
                                                     key={d.id}
                                                     className={cn(
-                                                        'flex cursor-pointer items-start gap-3 rounded-lg border p-4',
+                                                        'flex cursor-pointer items-start gap-3 rounded-2xl border p-4',
                                                         data.delivery_option_id === d.id
                                                             ? 'border-gold-600 bg-gold-50 dark:bg-white/5'
                                                             : 'border-border',
@@ -152,7 +152,7 @@ export default function Checkout({
                         </FormField>
                     </div>
 
-                    <aside className="border-border bg-card h-fit rounded-xl border p-6 lg:sticky lg:top-28">
+                    <aside className="border-border bg-card h-fit rounded-3xl border p-6 lg:sticky lg:top-28">
                         <h2 className="text-2xl font-semibold">Order summary</h2>
                         <ul className="divide-border mt-4 divide-y text-sm">
                             {summary.lines.map((l) => (
@@ -222,7 +222,7 @@ export default function Checkout({
                         <button
                             type="submit"
                             disabled={processing || noDelivery}
-                            className="bg-primary text-primary-foreground hover:bg-primary/90 mt-5 flex w-full items-center justify-center gap-2 rounded-md px-4 py-3 font-medium disabled:opacity-50"
+                            className="bg-primary text-primary-foreground hover:bg-primary/90 mt-5 flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 font-medium disabled:opacity-50"
                         >
                             <Lock className="size-4" />
                             {processing

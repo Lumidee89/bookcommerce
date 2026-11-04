@@ -8,7 +8,16 @@ export function Container({ className, children }: { className?: string; childre
 }
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
-    return <p className={cn('text-gold-700 dark:text-gold-300 text-xs font-semibold tracking-[0.25em] uppercase', className)}>{children}</p>;
+    return (
+        <p
+            className={cn(
+                'text-gold-700 dark:text-gold-300 inline-flex items-center rounded-full border border-current/40 px-4 py-1.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase',
+                className,
+            )}
+        >
+            {children}
+        </p>
+    );
 }
 
 export function SectionHeading({
@@ -35,16 +44,15 @@ export function SectionHeading({
         >
             <div className={cn('max-w-2xl', align === 'center' && 'mx-auto')}>
                 {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-                <h2 id={id} className="text-brand-900 dark:text-foreground mt-2 text-4xl font-semibold sm:text-[2.75rem]">
+                <h2 id={id} className="text-brand-900 dark:text-foreground mt-4 text-3xl leading-tight font-bold sm:text-[2.6rem]">
                     {title}
                 </h2>
-                <div className={cn('gold-rule mt-4', align === 'center' && 'mx-auto')} />
                 {description && <div className="text-muted-foreground mt-4 text-lg">{description}</div>}
             </div>
             {action && (
                 <Link
                     href={action.href}
-                    className="text-brand-800 hover:text-gold-700 dark:text-gold-300 inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold"
+                    className="border-brand-900/20 text-brand-900 hover:border-brand-900 hover:bg-brand-900 dark:text-gold-200 inline-flex shrink-0 items-center gap-1.5 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors hover:text-white dark:border-white/20"
                 >
                     {action.label} <ArrowRight className="size-4" />
                 </Link>
@@ -65,7 +73,11 @@ export function PageHero({
     children?: ReactNode;
 }) {
     return (
-        <section className="border-border relative overflow-hidden border-b bg-[radial-gradient(ellipse_at_top_right,var(--color-gold-50),transparent_60%)] dark:bg-none">
+        <section className="relative overflow-hidden">
+            <div
+                className="hero-disc pointer-events-none absolute -top-40 -right-40 hidden size-[30rem] rounded-full opacity-50 blur-2xl md:block"
+                aria-hidden
+            />
             <img
                 src="/images/brand/monogram.png"
                 alt=""
@@ -74,8 +86,7 @@ export function PageHero({
             />
             <Container className="relative py-14 sm:py-20">
                 {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-                <h1 className="text-brand-900 dark:text-foreground mt-3 max-w-3xl text-5xl font-semibold sm:text-6xl">{title}</h1>
-                <div className="gold-rule mt-5" />
+                <h1 className="text-brand-900 dark:text-foreground mt-5 max-w-3xl text-4xl leading-[1.08] font-bold sm:text-6xl">{title}</h1>
                 {description && <div className="text-muted-foreground mt-5 max-w-2xl text-lg">{description}</div>}
                 {children}
             </Container>
@@ -85,7 +96,7 @@ export function PageHero({
 
 export function EmptyState({ title, description, children }: { title: string; description?: string; children?: ReactNode }) {
     return (
-        <div className="border-border bg-card rounded-xl border border-dashed px-6 py-16 text-center">
+        <div className="border-border bg-card rounded-3xl border border-dashed px-6 py-16 text-center">
             <img src="/images/brand/monogram.png" alt="" aria-hidden className="mx-auto h-12 w-12 opacity-30" />
             <h3 className="mt-4 text-2xl font-semibold">{title}</h3>
             {description && <p className="text-muted-foreground mx-auto mt-2 max-w-md">{description}</p>}

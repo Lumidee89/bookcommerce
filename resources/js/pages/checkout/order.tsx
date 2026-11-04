@@ -68,7 +68,7 @@ export default function OrderPage({ order, retryUrl }: { order: OrderView; retry
             <Container className="max-w-3xl py-14">
                 <div
                     className={cn(
-                        'flex items-start gap-4 rounded-2xl border p-6',
+                        'flex items-start gap-4 rounded-[2rem] border p-6',
                         order.is_paid
                             ? 'border-brand-200 bg-brand-50 text-brand-900'
                             : order.status === 'payment_failed' || order.status === 'cancelled'
@@ -101,13 +101,13 @@ export default function OrderPage({ order, retryUrl }: { order: OrderView; retry
                 {!order.is_paid && order.status !== 'cancelled' && payments.enabled && (
                     <button
                         onClick={() => router.post(retryUrl)}
-                        className="bg-primary text-primary-foreground mt-6 w-full rounded-md px-6 py-3 font-medium"
+                        className="bg-primary text-primary-foreground mt-6 w-full rounded-full px-6 py-3 font-medium"
                     >
                         {pending ? 'Complete payment' : 'Try payment again'} · {formatMoney(order.total, order.currency)}
                     </button>
                 )}
 
-                <section className="border-border bg-card mt-8 rounded-xl border p-6">
+                <section className="border-border bg-card mt-8 rounded-3xl border p-6">
                     <h2 className="text-2xl font-semibold">Items</h2>
                     <ul className="divide-border mt-4 divide-y">
                         {order.items.map((item, i) => (
@@ -127,7 +127,7 @@ export default function OrderPage({ order, retryUrl }: { order: OrderView; retry
                                         {item.download.available ? (
                                             <a
                                                 href={item.download.url}
-                                                className="bg-gold-600 hover:bg-gold-700 inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-white"
+                                                className="bg-gold-600 hover:bg-gold-700 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white"
                                             >
                                                 <Download className="size-4" /> Download
                                             </a>
@@ -164,7 +164,7 @@ export default function OrderPage({ order, retryUrl }: { order: OrderView; retry
                 </section>
 
                 {order.requires_shipping && order.is_paid && (
-                    <section className="border-border mt-6 rounded-xl border p-6 text-sm">
+                    <section className="border-border mt-6 rounded-3xl border p-6 text-sm">
                         <h2 className="text-xl font-semibold">Delivery</h2>
                         <p className="mt-2">
                             {order.delivery_estimate ? `Estimated delivery: ${order.delivery_estimate}.` : 'We will be in touch about delivery.'}

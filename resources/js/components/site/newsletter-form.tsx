@@ -30,7 +30,7 @@ export function NewsletterForm({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
 
     const dark = tone === 'dark';
     const inputClass = cn(
-        'focus-visible:ring-gold-400 h-11 w-full rounded-md border px-3 text-sm focus-visible:ring-2 focus-visible:outline-none',
+        'focus-visible:ring-gold-400 h-12 w-full rounded-full border px-5 text-sm focus-visible:ring-2 focus-visible:outline-none',
         dark ? 'border-white/20 bg-white/10 text-white placeholder:text-white/60' : 'border-input bg-background',
     );
 
@@ -75,7 +75,7 @@ export function NewsletterForm({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
                 <button
                     type="submit"
                     disabled={processing}
-                    className="bg-gold-600 hover:bg-gold-700 h-11 shrink-0 rounded-md px-5 text-sm font-semibold text-white transition-colors disabled:opacity-60"
+                    className="bg-gold-600 hover:bg-gold-700 h-11 shrink-0 rounded-full px-5 text-sm font-semibold text-white transition-colors disabled:opacity-60"
                 >
                     Subscribe
                 </button>
@@ -122,22 +122,24 @@ export function NewsletterForm({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
 
 export function NewsletterBand() {
     return (
-        <section aria-labelledby="newsletter-heading" className="bg-brand-900 relative overflow-hidden text-white">
-            <img
-                src="/images/brand/monogram-light.png"
-                alt=""
-                aria-hidden
-                className="pointer-events-none absolute -top-10 -right-16 hidden w-96 opacity-[0.06] md:block"
-            />
-            <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8">
-                <div>
-                    <p className="text-gold-300 text-xs font-semibold tracking-[0.25em] uppercase">Stay connected</p>
-                    <h2 id="newsletter-heading" className="mt-3 text-4xl font-semibold text-[#f7f3ea]">
+        <section aria-labelledby="newsletter-heading" className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+            <div className="bg-brand-900 relative grid gap-10 overflow-hidden rounded-[2.5rem] px-6 py-14 text-white sm:px-12 lg:grid-cols-2 lg:px-16">
+                <img
+                    src="/images/brand/monogram-light.png"
+                    alt=""
+                    aria-hidden
+                    className="pointer-events-none absolute -top-10 -right-16 hidden w-96 opacity-[0.06] md:block"
+                />
+                <div className="relative">
+                    <p className="text-gold-300 inline-flex rounded-full border border-current/40 px-4 py-1.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase">
+                        Stay connected
+                    </p>
+                    <h2 id="newsletter-heading" className="mt-5 text-3xl font-bold text-[#f7f3ea] sm:text-4xl">
                         Teachings, new books and events — in your inbox.
                     </h2>
                     <p className="mt-4 max-w-lg text-white/75">Occasional, thoughtful updates. No spam, and you can unsubscribe at any time.</p>
                 </div>
-                <div className="lg:pt-6">
+                <div className="relative lg:pt-6">
                     <NewsletterForm />
                 </div>
             </div>

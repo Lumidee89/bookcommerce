@@ -25,7 +25,7 @@ export default function NewsletterStatus({ status, token }: { status: 'confirmed
                         </p>
                         <button
                             onClick={() => router.post(route('newsletter.unsubscribe.store', token!))}
-                            className="bg-primary text-primary-foreground mt-6 rounded-md px-6 py-3 font-medium"
+                            className="bg-primary text-primary-foreground mt-6 rounded-full px-6 py-3 font-medium"
                         >
                             Unsubscribe me
                         </button>

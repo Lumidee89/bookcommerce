@@ -68,7 +68,7 @@ export function FilterBar({
                     </select>
                 </div>
             ))}
-            <button type="submit" className="bg-primary text-primary-foreground h-11 rounded-md px-5 text-sm font-medium">
+            <button type="submit" className="bg-primary text-primary-foreground h-11 rounded-full px-5 text-sm font-medium">
                 Search
             </button>
         </form>

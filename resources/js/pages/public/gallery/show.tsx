@@ -58,7 +58,7 @@ export default function AlbumShow({ album, photos }: { album: Album; photos: Pho
                                             lastTrigger.current = e.currentTarget;
                                             setIndex(i);
                                         }}
-                                        className="focus-visible:ring-ring block w-full overflow-hidden rounded-lg focus-visible:ring-2"
+                                        className="focus-visible:ring-ring block w-full overflow-hidden rounded-2xl focus-visible:ring-2"
                                         aria-label={`View photo: ${p.alt}`}
                                     >
                                         <img

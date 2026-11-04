@@ -1,7 +1,9 @@
-import { AlbumCard, ArticleCard, BookCard, EventCard } from '@/components/site/cards';
+import { Monogram } from '@/components/site/brand';
+import { AlbumCard, ArticleCard, BookCard, BookCover, EventCard } from '@/components/site/cards';
 import { Container, Eyebrow, SectionHeading } from '@/components/site/section';
 import PublicLayout from '@/layouts/public-layout';
-import { formatMoney } from '@/lib/format';
+import { formatDate, formatMoney } from '@/lib/format';
+import { cn } from '@/lib/utils';
 import {
     type AlbumCard as Album,
     type ArticleCard as Article,
@@ -14,7 +16,24 @@ import {
     type VideoDetail,
 } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { ArrowRight, Award, Clock, Mic2, Quote } from 'lucide-react';
+import {
+    ArrowRight,
+    Award,
+    BookOpen,
+    Calendar,
+    ChevronsRight,
+    Clock,
+    Facebook,
+    Instagram,
+    Linkedin,
+    type LucideIcon,
+    Mic2,
+    Quote,
+    Twitter,
+    Youtube,
+} from 'lucide-react';
+
+const socialIcons: Record<string, LucideIcon> = { linkedin: Linkedin, instagram: Instagram, youtube: Youtube, facebook: Facebook, x: Twitter };
 
 interface Props {
     hero: { title: string; intro: string | null; image_url: string | null };
@@ -31,80 +50,230 @@ interface Props {
 
 export default function Home({ hero, bioPreview, books, services, featuredVideo, articles, events, awards, testimonials, albums }: Props) {
     const { site } = usePage<SharedData>().props;
+    const titleWords = hero.title.trim().split(/\s+/);
+    const heroAccent = titleWords.pop();
+    const heroLead = titleWords.join(' ');
+    const socials = Object.entries(site.social)
+        .filter(([key]) => key in socialIcons)
+        .slice(0, 2);
+    const featuredBook = books[0];
+    const coveredBooks = books.filter((book) => book.cover_url);
+    const nextEvent = events[0];
 
     return (
         <PublicLayout>
             {/* Hero */}
             <section className="relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,var(--color-gold-50),transparent_55%)] dark:hidden" />
-                <Container className="relative grid items-center gap-12 py-16 lg:grid-cols-[1.15fr_1fr] lg:py-24">
+                <Container className="relative grid items-center gap-14 pt-10 pb-12 lg:grid-cols-[1.05fr_1fr] lg:pt-16">
                     <div>
                         {site.tagline && <Eyebrow>{site.tagline}</Eyebrow>}
-                        <h1 className="text-brand-900 dark:text-foreground mt-5 text-5xl leading-[1.05] font-semibold sm:text-6xl lg:text-7xl">
-                            {hero.title}
+                        <h1 className="text-brand-900 dark:text-foreground mt-6 text-5xl leading-[1.05] font-bold sm:text-6xl lg:text-7xl">
+                            {heroLead && <>{heroLead} </>}
+                            <span className="text-gold-600 dark:text-gold-400">{heroAccent}</span>
                         </h1>
-                        <div className="gold-rule mt-7" />
-                        {hero.intro && <p className="text-muted-foreground mt-7 max-w-xl text-lg leading-relaxed">{hero.intro}</p>}
-                        <div className="mt-9 flex flex-wrap gap-3">
+                        {hero.intro && (
+                            <div className="mt-7 flex max-w-xl items-start gap-4">
+                                <span className="bg-gold-100 dark:bg-gold-900 flex size-11 shrink-0 items-center justify-center rounded-full">
+                                    <Monogram className="size-7 dark:hidden" />
+                                    <Monogram light className="hidden size-7 dark:block" />
+                                </span>
+                                <p className="text-muted-foreground text-lg leading-relaxed">{hero.intro}</p>
+                            </div>
+                        )}
+                        <div className="mt-10 flex flex-wrap items-center gap-4">
                             <Link
                                 href={route('books.index')}
-                                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-md px-6 py-3 font-medium"
+                                className="bg-card text-brand-900 shadow-soft hover:bg-brand-900 dark:text-foreground inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold tracking-wide uppercase transition-colors hover:text-white"
                             >
                                 Explore the books <ArrowRight className="size-4" />
                             </Link>
                             <Link
                                 href={route('consultations.index')}
-                                className="border-brand-900/20 hover:border-gold-600 hover:text-gold-700 inline-flex items-center rounded-md border px-6 py-3 font-medium dark:border-white/20"
+                                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center rounded-full px-7 py-4 text-sm font-medium"
                             >
                                 Book a consultation
-                            </Link>
-                            <Link
-                                href={route('speaking')}
-                                className="text-brand-800 hover:text-gold-700 dark:text-gold-300 inline-flex items-center gap-1.5 px-2 py-3 font-medium"
-                            >
-                                <Mic2 className="size-4" /> Invite to speak
                             </Link>
                         </div>
                         {site.supporting_line && <p className="text-muted-foreground mt-10 text-sm">{site.supporting_line}</p>}
                     </div>
 
-                    <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-                        <div className="border-gold-300/60 absolute -inset-3 rounded-[2rem] border" aria-hidden />
-                        {hero.image_url ? (
-                            <img
-                                src={hero.image_url}
-                                alt="Yemi Adebanjo"
-                                className="shadow-brand-900/20 relative aspect-[4/5] w-full rounded-[1.6rem] object-cover shadow-2xl"
-                            />
-                        ) : (
-                            <div className="bg-card shadow-brand-900/10 relative flex aspect-[4/5] w-full flex-col items-center justify-center rounded-[1.6rem] p-10 shadow-2xl">
-                                <img src="/images/brand/logo-full.png" alt="Yemi Adebanjo logo" className="w-full max-w-xs dark:hidden" />
-                                <img src="/images/brand/logo-full-light.png" alt="Yemi Adebanjo logo" className="hidden w-full max-w-xs dark:block" />
-                            </div>
+                    {/* Portrait disc with floating cards */}
+                    <div className="relative mx-auto aspect-square w-full max-w-[32rem]">
+                        <div className="hero-disc absolute inset-[4%] overflow-hidden rounded-full">
+                            {hero.image_url ? (
+                                <img src={hero.image_url} alt="Yemi Adebanjo" className="h-full w-full object-cover object-top" />
+                            ) : (
+                                <div className="flex h-full items-center justify-center p-[18%]">
+                                    <img src="/images/brand/logo-full.png" alt="Yemi Adebanjo logo" className="w-full dark:hidden" />
+                                    <img src="/images/brand/logo-full-light.png" alt="Yemi Adebanjo logo" className="hidden w-full dark:block" />
+                                </div>
+                            )}
+                        </div>
+
+                        <span className="bg-gold-400 absolute top-[30%] right-[2%] size-3 rounded-full opacity-70" aria-hidden />
+                        <span className="bg-brand-400 absolute bottom-[8%] left-[18%] size-2.5 rounded-full opacity-70" aria-hidden />
+
+                        {socials.map(([key, url], i) => {
+                            const Icon = socialIcons[key];
+                            return (
+                                <a
+                                    key={key}
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={key}
+                                    className={cn(
+                                        'bg-card text-brand-900 shadow-soft hover:bg-brand-900 dark:text-gold-200 absolute flex size-12 items-center justify-center rounded-full transition-colors hover:text-white',
+                                        i === 0 ? 'animate-float top-[2%] right-[22%]' : 'animate-float-slow top-[44%] -right-[2%]',
+                                    )}
+                                >
+                                    <Icon className="size-5" />
+                                </a>
+                            );
+                        })}
+
+                        {featuredBook && (
+                            <Link
+                                href={route('books.show', featuredBook.slug)}
+                                className="glass-card shadow-soft animate-float-slow absolute top-[38%] -left-2 flex w-44 flex-col gap-3 rounded-3xl p-4 sm:-left-10 sm:w-48"
+                            >
+                                {featuredBook.cover_url ? (
+                                    <BookCover book={featuredBook} className="w-14 rounded-md shadow-md" />
+                                ) : (
+                                    <span className="bg-brand-900 flex size-12 items-center justify-center rounded-2xl">
+                                        <Monogram light className="size-7" />
+                                    </span>
+                                )}
+                                <div>
+                                    <p className="text-muted-foreground text-[0.65rem] font-semibold tracking-widest uppercase">Featured book</p>
+                                    <p className="text-brand-900 dark:text-foreground font-display mt-1 line-clamp-2 leading-snug font-semibold">
+                                        {featuredBook.title}
+                                    </p>
+                                    {featuredBook.is_purchasable && featuredBook.from_price !== null && (
+                                        <p className="text-gold-700 dark:text-gold-300 mt-1 text-sm font-medium">
+                                            {featuredBook.sales_status === 'free'
+                                                ? 'Free'
+                                                : `From ${formatMoney(featuredBook.from_price, featuredBook.currency)}`}
+                                        </p>
+                                    )}
+                                </div>
+                            </Link>
                         )}
+
+                        <Link
+                            href={nextEvent ? route('events.show', nextEvent.slug) : route('consultations.index')}
+                            className="bg-card shadow-soft animate-float absolute right-0 bottom-[2%] flex w-56 items-center gap-3 rounded-[2rem] p-4 sm:-right-4"
+                        >
+                            <span className="bg-brand-900 flex size-11 shrink-0 items-center justify-center rounded-3xl text-[#f7f3ea]">
+                                <Calendar className="size-5" />
+                            </span>
+                            <span className="min-w-0">
+                                <span className="text-muted-foreground block text-[0.65rem] font-semibold tracking-widest uppercase">
+                                    {nextEvent ? 'Next event' : 'Consultations'}
+                                </span>
+                                <span className="text-brand-900 dark:text-foreground block truncate text-sm font-semibold">
+                                    {nextEvent ? nextEvent.title : 'Pick a time that suits you'}
+                                </span>
+                                {nextEvent && (
+                                    <span className="text-muted-foreground block text-xs">
+                                        {formatDate(nextEvent.starts_at, { day: 'numeric', month: 'short', year: 'numeric' }, nextEvent.timezone)}
+                                    </span>
+                                )}
+                            </span>
+                        </Link>
                     </div>
                 </Container>
-            </section>
 
-            {/* Biography preview */}
-            {bioPreview && (
-                <section className="bg-muted/50 border-border border-y">
-                    <Container className="grid gap-10 py-16 md:grid-cols-[auto_1fr] md:items-center">
-                        <img src="/images/brand/monogram.png" alt="" aria-hidden className="h-20 w-20 dark:invert" />
-                        <div>
-                            <p className="text-brand-900 dark:text-foreground max-w-4xl font-serif text-2xl leading-relaxed sm:text-[1.75rem]">
-                                {bioPreview}
-                            </p>
-                            <Link
-                                href={route('about')}
-                                className="text-gold-700 dark:text-gold-300 mt-5 inline-flex items-center gap-1.5 text-sm font-semibold"
-                            >
-                                Read the full biography <ArrowRight className="size-4" />
-                            </Link>
+                {/* Bento tiles */}
+                <Container className="grid gap-4 pb-20 sm:grid-cols-2 lg:grid-cols-12 lg:grid-rows-[repeat(2,minmax(11rem,auto))]">
+                    <Link
+                        href={route('articles.index')}
+                        className="tile-gold group relative flex min-h-80 flex-col overflow-hidden rounded-[2rem] p-8 sm:row-span-2 lg:col-span-4"
+                    >
+                        <span className="bg-card shadow-soft flex size-14 items-center justify-center rounded-full">
+                            <BookOpen className="text-brand-900 dark:text-gold-200 size-6" strokeWidth={1.75} />
+                        </span>
+                        <h2 className="text-brand-900 dark:text-foreground mt-8 text-3xl font-semibold">What I teach</h2>
+                        <p className="text-brand-900/70 dark:text-foreground/70 mt-3 max-w-xs">
+                            Articles, teachings and videos on leadership, faith and purposeful living.
+                        </p>
+                        <span className="text-brand-900 dark:text-gold-200 mt-auto inline-flex items-center gap-1.5 pt-8 text-sm font-semibold">
+                            Read the latest <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                        </span>
+                        <img
+                            src="/images/brand/monogram.png"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -right-8 -bottom-8 w-48 opacity-[0.12] dark:invert"
+                        />
+                    </Link>
+
+                    <Link
+                        href={route('books.index')}
+                        className="bg-gold-300 text-brand-900 group relative flex flex-col justify-between overflow-hidden rounded-[2rem] p-7 lg:col-span-3"
+                    >
+                        <div className="flex justify-end">
+                            {coveredBooks.length > 0 ? (
+                                <div className="flex -space-x-3">
+                                    {coveredBooks.slice(0, 3).map((book) => (
+                                        <img
+                                            key={book.id}
+                                            src={book.cover_url!}
+                                            alt=""
+                                            className="aspect-[2/3] w-8 rounded-md border-2 border-white/80 object-cover"
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <Monogram className="size-9 opacity-70" />
+                            )}
                         </div>
-                    </Container>
-                </section>
-            )}
+                        <div className="mt-6">
+                            <p className="font-display text-4xl font-semibold">Books</p>
+                            <p className="text-brand-900/75 mt-1">Digital & print editions</p>
+                        </div>
+                    </Link>
+
+                    <Link
+                        href={route('about')}
+                        className="tile-blush group relative flex flex-col justify-center overflow-hidden rounded-[2rem] p-8 sm:row-span-2 lg:col-span-5"
+                    >
+                        <img
+                            src="/images/brand/monogram.png"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute top-1/2 -left-6 hidden w-40 -translate-y-1/2 opacity-[0.08] sm:block dark:invert"
+                        />
+                        <div className="relative sm:pl-28">
+                            <Eyebrow className="text-brand-900 dark:text-gold-200">About</Eyebrow>
+                            <p className="text-brand-900 dark:text-foreground font-display mt-5 line-clamp-5 text-xl leading-snug font-medium sm:text-2xl">
+                                {bioPreview ?? 'Author, leadership teacher and consultant.'}
+                            </p>
+                            <span className="text-gold-700 dark:text-gold-300 mt-5 inline-flex items-center gap-1.5 text-sm font-semibold">
+                                Read the full biography <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                            </span>
+                        </div>
+                    </Link>
+
+                    <Link
+                        href={route('consultations.index')}
+                        className="bg-brand-700 group relative flex flex-col justify-between overflow-hidden rounded-[2rem] p-7 text-white lg:col-span-3"
+                    >
+                        <div className="flex justify-end">
+                            <span className="inline-flex items-center gap-1 text-white">
+                                <ChevronsRight className="size-5" />
+                                <span className="flex size-9 items-center justify-center rounded-full bg-white/20">
+                                    <Mic2 className="size-4" />
+                                </span>
+                            </span>
+                        </div>
+                        <div className="mt-6">
+                            <p className="font-display text-4xl font-semibold">{services.length > 0 ? services.length : '1:1'}</p>
+                            <p className="mt-1 text-white/85">{services.length === 1 ? 'Consultation service' : 'Consultation services'}</p>
+                        </div>
+                    </Link>
+                </Container>
+            </section>
 
             {/* Books */}
             {books.length > 0 && (
@@ -128,8 +297,8 @@ export default function Home({ hero, bioPreview, books, services, featuredVideo,
 
             {/* Consultations */}
             {services.length > 0 && (
-                <section aria-labelledby="services-heading" className="bg-brand-900 text-[#f7f3ea]">
-                    <Container className="py-20">
+                <section aria-labelledby="services-heading">
+                    <Container className="bg-brand-900 relative overflow-hidden rounded-[2.5rem] py-16 text-[#f7f3ea] sm:px-12 lg:px-16">
                         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
                             <div>
                                 <Eyebrow className="text-gold-300">Consultations</Eyebrow>
@@ -142,7 +311,7 @@ export default function Home({ hero, bioPreview, books, services, featuredVideo,
                                 </p>
                                 <Link
                                     href={route('consultations.index')}
-                                    className="bg-gold-600 hover:bg-gold-700 mt-8 inline-flex items-center gap-2 rounded-md px-6 py-3 font-medium text-white"
+                                    className="bg-gold-600 hover:bg-gold-700 mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium text-white"
                                 >
                                     See availability <ArrowRight className="size-4" />
                                 </Link>
@@ -179,7 +348,7 @@ export default function Home({ hero, bioPreview, books, services, featuredVideo,
             {featuredVideo?.embed_url && (
                 <section aria-labelledby="video-heading" className="py-20">
                     <Container className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
-                        <div className="bg-brand-900 aspect-video overflow-hidden rounded-xl shadow-xl">
+                        <div className="bg-brand-900 aspect-video overflow-hidden rounded-3xl shadow-xl">
                             <iframe
                                 src={featuredVideo.embed_url}
                                 title={featuredVideo.title}
@@ -227,7 +396,7 @@ export default function Home({ hero, bioPreview, books, services, featuredVideo,
             {/* Speaking */}
             <section aria-labelledby="speaking-heading" className="py-20">
                 <Container>
-                    <div className="from-gold-50 to-background border-gold-200 relative overflow-hidden rounded-2xl border bg-gradient-to-br p-10 sm:p-14 dark:border-white/10 dark:from-[#10271b] dark:to-[#0c1f15]">
+                    <div className="from-gold-50 to-background border-gold-200 relative overflow-hidden rounded-[2rem] border bg-gradient-to-br p-10 sm:p-14 dark:border-white/10 dark:from-[#2c1d39] dark:to-[#24172f]">
                         <img
                             src="/images/brand/monogram.png"
                             alt=""
@@ -247,13 +416,13 @@ export default function Home({ hero, bioPreview, books, services, featuredVideo,
                             <div className="flex flex-wrap gap-3 lg:justify-end">
                                 <Link
                                     href={route('speaking')}
-                                    className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-md px-6 py-3 font-medium"
+                                    className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium"
                                 >
                                     <Mic2 className="size-4" /> Send an invitation
                                 </Link>
                                 <Link
                                     href={route('events.index')}
-                                    className="border-border hover:border-gold-600 inline-flex items-center rounded-md border px-6 py-3 font-medium"
+                                    className="border-border hover:border-gold-600 inline-flex items-center rounded-full border px-6 py-3 font-medium"
                                 >
                                     Upcoming events
                                 </Link>
@@ -282,7 +451,7 @@ export default function Home({ hero, bioPreview, books, services, featuredVideo,
                         />
                         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                             {awards.map((award) => (
-                                <li key={award.id} className="border-border bg-card rounded-xl border p-6">
+                                <li key={award.id} className="border-border bg-card rounded-3xl border p-6">
                                     <Award className="text-gold-600 size-7" strokeWidth={1.5} />
                                     <h3 className="mt-4 text-xl leading-snug font-semibold">{award.title}</h3>
                                     {award.issuer && <p className="text-muted-foreground mt-1 text-sm">{award.issuer}</p>}
@@ -301,7 +470,7 @@ export default function Home({ hero, bioPreview, books, services, featuredVideo,
                         <SectionHeading id="testimonials-heading" eyebrow="Testimonials" title="In their words" align="center" />
                         <div className="grid gap-6 md:grid-cols-3">
                             {testimonials.map((t) => (
-                                <figure key={t.id} className="bg-card border-border flex flex-col rounded-xl border p-7">
+                                <figure key={t.id} className="bg-card border-border flex flex-col rounded-3xl border p-7">
                                     <Quote className="text-gold-500 size-8" strokeWidth={1.25} />
                                     <blockquote className="mt-4 flex-1 font-serif text-xl leading-relaxed">“{t.body}”</blockquote>
                                     <figcaption className="mt-6 flex items-center gap-3">

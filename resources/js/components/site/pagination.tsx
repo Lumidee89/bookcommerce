@@ -15,7 +15,7 @@ export function Pagination({ meta, className }: { meta: Pick<Paginated<unknown>,
                         href={link.url}
                         preserveScroll
                         className={cn(
-                            'min-w-10 rounded-md border px-3 py-2 text-center text-sm',
+                            'min-w-10 rounded-full border px-3 py-2 text-center text-sm',
                             link.active ? 'bg-primary text-primary-foreground border-primary' : 'border-border hover:bg-accent',
                         )}
                         aria-current={link.active ? 'page' : undefined}

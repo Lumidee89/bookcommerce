@@ -44,7 +44,7 @@ export function AnalyticsConsent() {
         <div
             role="dialog"
             aria-label="Cookie preferences"
-            className="border-border bg-card fixed inset-x-4 bottom-4 z-50 mx-auto max-w-2xl rounded-xl border p-5 shadow-2xl"
+            className="border-border bg-card fixed inset-x-4 bottom-4 z-50 mx-auto max-w-2xl rounded-3xl border p-5 shadow-2xl"
         >
             <p className="text-sm">
                 We would like to use analytics cookies to understand how this website is used. They are only set if you agree.{' '}
@@ -53,10 +53,10 @@ export function AnalyticsConsent() {
                 </a>
             </p>
             <div className="mt-4 flex gap-3">
-                <button onClick={() => decide('granted')} className="bg-primary text-primary-foreground rounded-md px-4 py-2 text-sm font-medium">
+                <button onClick={() => decide('granted')} className="bg-primary text-primary-foreground rounded-full px-4 py-2 text-sm font-medium">
                     Accept analytics
                 </button>
-                <button onClick={() => decide('denied')} className="border-border rounded-md border px-4 py-2 text-sm font-medium">
+                <button onClick={() => decide('denied')} className="border-border rounded-full border px-4 py-2 text-sm font-medium">
                     Decline
                 </button>
             </div>

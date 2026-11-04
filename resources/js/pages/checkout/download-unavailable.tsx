@@ -61,7 +61,7 @@ export default function DownloadUnavailable({
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="bg-primary text-primary-foreground w-full rounded-md px-4 py-3 font-medium"
+                                className="bg-primary text-primary-foreground w-full rounded-full px-4 py-3 font-medium"
                             >
                                 Request renewed access
                             </button>

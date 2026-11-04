@@ -20,11 +20,11 @@ export default function About({ bioShort, sections, awardGroups, documents, test
                 <div className="mt-8 flex flex-wrap gap-3">
                     <Link
                         href={route('consultations.index')}
-                        className="bg-primary text-primary-foreground rounded-md px-5 py-2.5 text-sm font-medium"
+                        className="bg-primary text-primary-foreground rounded-full px-5 py-2.5 text-sm font-medium"
                     >
                         Book a consultation
                     </Link>
-                    <Link href={route('speaking')} className="border-border hover:border-gold-600 rounded-md border px-5 py-2.5 text-sm font-medium">
+                    <Link href={route('speaking')} className="border-border hover:border-gold-600 rounded-full border px-5 py-2.5 text-sm font-medium">
                         Speaking invitations
                     </Link>
                     {documents[0] && (
@@ -72,7 +72,7 @@ export default function About({ bioShort, sections, awardGroups, documents, test
                                             src={section.image_url}
                                             alt={section.image_alt ?? ''}
                                             loading="lazy"
-                                            className="mt-8 w-full rounded-xl object-cover"
+                                            className="mt-8 w-full rounded-3xl object-cover"
                                         />
                                     )}
                                 </div>
@@ -99,7 +99,7 @@ export default function About({ bioShort, sections, awardGroups, documents, test
                                     </h3>
                                     <ul className="mt-5 grid gap-5 md:grid-cols-2">
                                         {group.items.map((award) => (
-                                            <li key={award.id} className="bg-card border-border flex gap-4 rounded-xl border p-5">
+                                            <li key={award.id} className="bg-card border-border flex gap-4 rounded-3xl border p-5">
                                                 {award.image_url ? (
                                                     <img src={award.image_url} alt="" className="size-16 shrink-0 rounded-md object-cover" />
                                                 ) : (
@@ -157,7 +157,7 @@ export default function About({ bioShort, sections, awardGroups, documents, test
                                         <a
                                             href={doc.url}
                                             download
-                                            className="border-border hover:border-gold-500 flex items-start gap-3 rounded-lg border p-4"
+                                            className="border-border hover:border-gold-500 flex items-start gap-3 rounded-2xl border p-4"
                                         >
                                             <Download className="text-gold-600 mt-0.5 size-5 shrink-0" />
                                             <span>
@@ -173,7 +173,7 @@ export default function About({ bioShort, sections, awardGroups, documents, test
                     {testimonials.length > 0 && (
                         <div className="grid gap-5 sm:grid-cols-2">
                             {testimonials.map((t) => (
-                                <figure key={t.id} className="bg-card border-border rounded-xl border p-6">
+                                <figure key={t.id} className="bg-card border-border rounded-3xl border p-6">
                                     <Quote className="text-gold-500 size-6" />
                                     <blockquote className="mt-3 font-serif text-lg">“{t.body}”</blockquote>
                                     <figcaption className="text-muted-foreground mt-4 text-sm">
